@@ -36,11 +36,12 @@ Contrairement au composant Embed natif qui bloque les balises `<script>`, ce plu
 ### 1. Via l'interface Budibase
 
 ```
-1. Se connecter à Budibase (http://localhost:10000)
-2. Avatar → Portal → Plugins
-3. Cliquer "Add plugin"
-4. Uploader: ~/Desktop/budibase-plugins/injecteur-code-personnalise.js
-5. Confirmer l'installation
+1. Se connecter à Budibase
+2. Menu Settings (roue dentée)
+3. Onglet Plugins
+4. Cliquer "Add plugin"
+5. Uploader le fichier .tar.gz du plugin
+6. Confirmer l'installation
 ```
 
 ### 2. Vérification
