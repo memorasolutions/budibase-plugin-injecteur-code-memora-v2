@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Démo Snippets Budibase - MEMORA Solutions</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      padding: 40px;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 32px;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+      padding: 20px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    .section h2 {
+      color: #4CAF50;
+      margin-bottom: 15px;
+      font-size: 24px;
+      border-bottom: 2px solid #4CAF50;
+      padding-bottom: 10px;
+    }
+
+    .snippet {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 15px 0;
+      overflow-x: auto;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    .snippet-label {
+      font-weight: bold;
+      color: #4CAF50;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .snippet-desc {
+      color: #666;
+      font-size: 12px;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 5px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 11px;
+      transition: background 0.3s;
+    }
+
+    .copy-btn:hover {
+      background: #45a049;
+    }
+
+    .copy-btn:active {
+      background: #3d8b40;
+    }
+
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .stat-card h3 {
+      font-size: 14px;
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+
+    .stat-value {
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .demo-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .demo-table th {
+      background: #4CAF50;
+      color: white;
+      padding: 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .demo-table td {
+      padding: 12px;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .demo-table tr:hover {
+      background: #f5f5f5;
+    }
+
+    .btn {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      transition: all 0.3s;
+      margin: 5px;
+    }
+
+    .btn:hover {
+      background: #45a049;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+    }
+
+    .btn-secondary {
+      background: #2196F3;
+    }
+
+    .btn-secondary:hover {
+      background: #0b7dda;
+    }
+
+    .btn-danger {
+      background: #f44336;
+    }
+
+    .btn-danger:hover {
+      background: #da190b;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px;
+      border: 2px solid #e0e0e0;
+      border-radius: 6px;
+      font-size: 14px;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+
+    .notification {
+      padding: 12px 20px;
+      border-radius: 6px;
+      margin: 10px 0;
+      font-weight: 500;
+      display: none;
+    }
+
+    .notification.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .notification.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .notification.warning {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeaa7;
+    }
+
+    .notification.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 2px solid #e0e0e0;
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .footer a {
+      color: #4CAF50;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    code {
+      background: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: #e83e8c;
+      font-family: 'Monaco', 'Courier New', monospace;
+      font-size: 13px;
+    }
+
+    .highlight {
+      background: #fff3cd;
+      padding: 15px;
+      border-left: 4px solid #ffc107;
+      margin: 15px 0;
+      border-radius: 4px;
+    }
+
+    .category-badge {
+      display: inline-block;
+      background: #4CAF50;
+      color: white;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Bibliothèque de Snippets Budibase</h1>
+    <p class="subtitle">Collection complète de 20 snippets JavaScript pour vos applications Budibase</p>
+    <p class="subtitle"><strong>MEMORA Solutions</strong> - Stéphane Lapointe | <a href="mailto:stephane@memora.ca">stephane@memora.ca</a></p>
+
+    <!-- Statistiques -->
+    <div class="section">
+      <h2>📊 Statistiques de la bibliothèque</h2>
+      <div class="stats-container">
+        <div class="stat-card">
+          <h3>Total Snippets</h3>
+          <p class="stat-value">20</p>
+        </div>
+        <div class="stat-card">
+          <h3>Catégories</h3>
+          <p class="stat-value">5</p>
+        </div>
+        <div class="stat-card">
+          <h3>Notifications</h3>
+          <p class="stat-value">4</p>
+        </div>
+        <div class="stat-card">
+          <h3>CRUD</h3>
+          <p class="stat-value">5</p>
+        </div>
+        <div class="stat-card">
+          <h3>DOM</h3>
+          <p class="stat-value">4</p>
+        </div>
+        <div class="stat-card">
+          <h3>Utilitaires</h3>
+          <p class="stat-value">4</p>
+        </div>
+        <div class="stat-card">
+          <h3>Exemples</h3>
+          <p class="stat-value">3</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. NOTIFICATIONS -->
+    <div class="section">
+      <h2>🔔 1. Notifications</h2>
+      <span class="category-badge">4 snippets</span>
+
+      <div class="snippet-label">Success Notification</div>
+      <div class="snippet-desc">Affiche un message de succès à l'utilisateur</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <code>budibase.notify.success("Opération réussie !")</code>
+      </div>
+
+      <div class="snippet-label">Error Notification</div>
+      <div class="snippet-desc">Affiche un message d'erreur à l'utilisateur</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <code>budibase.notify.error("Une erreur est survenue")</code>
+      </div>
+
+      <div class="snippet-label">Warning Notification</div>
+      <div class="snippet-desc">Affiche un avertissement à l'utilisateur</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <code>budibase.notify.warning("Attention : action irréversible")</code>
+      </div>
+
+      <div class="snippet-label">Info Notification</div>
+      <div class="snippet-desc">Affiche une information à l'utilisateur</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <code>budibase.notify.info("Chargement en cours...")</code>
+      </div>
+    </div>
+
+    <!-- 2. CRUD DATA -->
+    <div class="section">
+      <h2>💾 2. CRUD Données</h2>
+      <span class="category-badge">5 snippets</span>
+
+      <div class="snippet-label">Rechercher dans une table</div>
+      <div class="snippet-desc">Recherche des données avec filtres et tri</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>budibase.API.searchTable({
+  tableId: "ta_users",
+  query: {
+    equal: {
+      status: "active"
+    }
+  },
+  limit: 50,
+  sort: "created_at",
+  sortOrder: "descending"
+}).then(result => {
+  console.log("Résultats:", result.data)
+  budibase.notify.success(`${result.data.length} résultats`)
+}).catch(error => {
+  budibase.notify.error("Erreur de recherche")
+})</pre>
+      </div>
+
+      <div class="snippet-label">Sauvegarder une ligne</div>
+      <div class="snippet-desc">Crée une nouvelle ligne dans une table</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>budibase.API.saveRow({
+  tableId: "ta_products",
+  name: "Nouveau produit",
+  price: 99.99,
+  status: "active"
+}).then(result => {
+  budibase.notify.success("Produit créé !")
+}).catch(error => {
+  budibase.notify.error("Erreur de création")
+})</pre>
+      </div>
+
+      <div class="snippet-label">Récupérer une ligne par ID</div>
+      <div class="snippet-desc">Récupère une ligne spécifique</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>budibase.API.fetchRow({
+  tableId: "ta_users",
+  rowId: "ro_123abc"
+}).then(result => {
+  console.log("Ligne:", result)
+  budibase.notify.success("Données chargées")
+}).catch(error => {
+  budibase.notify.error("Ligne introuvable")
+})</pre>
+      </div>
+
+      <div class="snippet-label">Supprimer une ligne</div>
+      <div class="snippet-desc">Supprime une ligne de la base de données</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>budibase.API.deleteRow({
+  tableId: "ta_users",
+  rowId: "ro_123abc",
+  revId: "1-xyz"
+}).then(result => {
+  budibase.notify.success("Ligne supprimée")
+}).catch(error => {
+  budibase.notify.error("Erreur de suppression")
+})</pre>
+      </div>
+
+      <div class="snippet-label">Mettre à jour partiellement</div>
+      <div class="snippet-desc">Met à jour certains champs d'une ligne</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>budibase.API.fetchRow({
+  tableId: "ta_products",
+  rowId: "ro_456def"
+}).then(existingRow => {
+  return budibase.API.saveRow({
+    ...existingRow,
+    price: 149.99
+  })
+}).then(result => {
+  budibase.notify.success("Mise à jour OK")
+})</pre>
+      </div>
+    </div>
+
+    <!-- 3. MANIPULATION DOM -->
+    <div class="section">
+      <h2>🎨 3. Manipulation DOM</h2>
+      <span class="category-badge">4 snippets</span>
+
+      <div class="snippet-label">Créer un élément HTML</div>
+      <div class="snippet-desc">Crée et insère un nouvel élément dans le DOM</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>const element = document.createElement('div')
+element.textContent = 'Nouveau contenu'
+element.className = 'custom-class'
+
+const container = document.querySelector('.container')
+if (container) {
+  container.appendChild(element)
+  budibase.notify.success("Élément créé")
+}</pre>
+      </div>
+
+      <div class="snippet-label">Ajouter un écouteur de clic</div>
+      <div class="snippet-desc">Ajoute un gestionnaire d'événement click</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>const button = document.querySelector('.my-button')
+if (button) {
+  button.addEventListener('click', function(event) {
+    event.preventDefault()
+    console.log('Bouton cliqué!')
+    budibase.notify.info("Clic détecté")
+  })
+}</pre>
+      </div>
+
+      <div class="snippet-label">Basculer la visibilité</div>
+      <div class="snippet-desc">Affiche ou masque un élément</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>const element = document.querySelector('.my-element')
+if (element) {
+  element.style.display =
+    element.style.display === 'none' ? 'block' : 'none'
+}</pre>
+      </div>
+
+      <div class="snippet-label">Modifier le style</div>
+      <div class="snippet-desc">Change les propriétés CSS d'un élément</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>const element = document.querySelector('.my-element')
+if (element) {
+  element.style.backgroundColor = '#4CAF50'
+  element.style.color = 'white'
+  element.style.padding = '20px'
+}</pre>
+      </div>
+    </div>
+
+    <!-- 4. UTILITAIRES -->
+    <div class="section">
+      <h2>🔧 4. Utilitaires</h2>
+      <span class="category-badge">5 snippets</span>
+
+      <div class="snippet-label">Logger des données</div>
+      <div class="snippet-desc">Affiche des informations dans la console</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>const userData = { name: "John", email: "john@example.com" }
+console.log('User data:', userData)
+console.table(userData)</pre>
+      </div>
+
+      <div class="snippet-label">Exécuter après délai</div>
+      <div class="snippet-desc">setTimeout - exécution différée</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>setTimeout(() => {
+  console.log("Exécution différée")
+  budibase.notify.info("Action exécutée")
+}, 3000) // 3 secondes</pre>
+      </div>
+
+      <div class="snippet-label">Exécuter périodiquement</div>
+      <div class="snippet-desc">setInterval - exécution répétée</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>const intervalId = setInterval(() => {
+  console.log("Exécution périodique")
+}, 5000) // Toutes les 5 secondes
+
+// Pour arrêter: clearInterval(intervalId)</pre>
+      </div>
+
+      <div class="snippet-label">Exécution conditionnelle</div>
+      <div class="snippet-desc">if/else basé sur une condition</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>const user = budibase.auth
+
+if (user.roleId === 'ADMIN') {
+  budibase.notify.success("Bienvenue, admin")
+} else {
+  budibase.notify.info("Bienvenue, utilisateur")
+}</pre>
+      </div>
+
+      <div class="snippet-label">Infos utilisateur</div>
+      <div class="snippet-desc">Récupère les données de l'utilisateur connecté</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>const user = budibase.auth
+console.log('Email:', user.email)
+console.log('Rôle:', user.roleId)
+budibase.notify.info(`Connecté: ${user.email}`)</pre>
+      </div>
+    </div>
+
+    <!-- 5. EXEMPLES COMPLETS -->
+    <div class="section">
+      <h2>⭐ 5. Exemples Complets</h2>
+      <span class="category-badge">3 snippets</span>
+
+      <div class="highlight">
+        <strong>💡 Astuce :</strong> Ces exemples montrent des cas d'usage réels combinant plusieurs APIs Budibase.
+      </div>
+
+      <div class="snippet-label">Formulaire avec validation</div>
+      <div class="snippet-desc">Formulaire complet avec validation et sauvegarde</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>// Récupérer les valeurs
+const formData = {
+  name: document.querySelector('#name').value,
+  email: document.querySelector('#email').value,
+  message: document.querySelector('#message').value
+}
+
+// Validation
+if (!formData.name || !formData.email) {
+  budibase.notify.error("Champs obligatoires manquants")
+  return
+}
+
+// Email valide ?
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+if (!emailRegex.test(formData.email)) {
+  budibase.notify.error("Email invalide")
+  return
+}
+
+// Sauvegarder
+budibase.API.saveRow({
+  tableId: "ta_contacts",
+  ...formData,
+  submitted_at: new Date().toISOString()
+}).then(result => {
+  budibase.notify.success("Formulaire envoyé !")
+  document.querySelector('form').reset()
+}).catch(error => {
+  budibase.notify.error("Erreur d'envoi")
+})</pre>
+      </div>
+
+      <div class="snippet-label">Tableau de données dynamique</div>
+      <div class="snippet-desc">Génère un tableau HTML à partir des données</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>budibase.API.searchTable({
+  tableId: "ta_products",
+  limit: 100
+}).then(result => {
+  const data = result.data
+  let tableHTML = '&lt;table class="demo-table">&lt;thead>&lt;tr>'
+
+  // En-têtes
+  if (data.length > 0) {
+    Object.keys(data[0]).forEach(key => {
+      if (!key.startsWith('_')) {
+        tableHTML += `&lt;th>${key}&lt;/th>`
+      }
+    })
+    tableHTML += '&lt;/tr>&lt;/thead>&lt;tbody>'
+
+    // Lignes
+    data.forEach(row => {
+      tableHTML += '&lt;tr>'
+      Object.entries(row).forEach(([key, value]) => {
+        if (!key.startsWith('_')) {
+          tableHTML += `&lt;td>${value || '-'}&lt;/td>`
+        }
+      })
+      tableHTML += '&lt;/tr>'
+    })
+    tableHTML += '&lt;/tbody>&lt;/table>'
+
+    document.querySelector('#table-container').innerHTML = tableHTML
+    budibase.notify.success(`${data.length} lignes affichées`)
+  }
+})</pre>
+      </div>
+
+      <div class="snippet-label">Dashboard avec statistiques</div>
+      <div class="snippet-desc">Calcule et affiche des KPIs</div>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>budibase.API.searchTable({
+  tableId: "ta_orders",
+  limit: 1000
+}).then(result => {
+  const data = result.data
+
+  // Calculer stats
+  const stats = {
+    total: data.length,
+    active: data.filter(i => i.status === 'active').length,
+    completed: data.filter(i => i.status === 'completed').length,
+    pending: data.filter(i => i.status === 'pending').length
+  }
+
+  // Afficher
+  const html = `
+    &lt;div class="stats-container">
+      &lt;div class="stat-card">
+        &lt;h3>Total&lt;/h3>
+        &lt;p class="stat-value">${stats.total}&lt;/p>
+      &lt;/div>
+      &lt;div class="stat-card">
+        &lt;h3>Actifs&lt;/h3>
+        &lt;p class="stat-value">${stats.active}&lt;/p>
+      &lt;/div>
+      &lt;div class="stat-card">
+        &lt;h3>Terminés&lt;/h3>
+        &lt;p class="stat-value">${stats.completed}&lt;/p>
+      &lt;/div>
+      &lt;div class="stat-card">
+        &lt;h3>En attente&lt;/h3>
+        &lt;p class="stat-value">${stats.pending}&lt;/p>
+      &lt;/div>
+    &lt;/div>
+  `
+
+  document.querySelector('#dashboard-stats').innerHTML = html
+  budibase.notify.success("Stats chargées")
+})</pre>
+      </div>
+    </div>
+
+    <!-- GUIDE D'UTILISATION -->
+    <div class="section">
+      <h2>📖 Guide d'utilisation</h2>
+
+      <h3>Configuration du plugin</h3>
+      <ol>
+        <li>Installez le plugin "Injecteur de code personnalisé" dans Budibase</li>
+        <li>Glissez le composant sur votre écran</li>
+        <li>Dans les propriétés : <strong>Activez "Accès au contexte Budibase"</strong></li>
+        <li>Choisissez le mode d'exécution :
+          <ul>
+            <li><code>onMount</code> - Exécution automatique au chargement</li>
+            <li><code>onClick</code> - Exécution manuelle via bouton</li>
+            <li><code>onInterval</code> - Exécution périodique</li>
+          </ul>
+        </li>
+        <li>Collez votre code JavaScript</li>
+      </ol>
+
+      <h3>Structure de l'objet budibase</h3>
+      <div class="snippet">
+        <button class="copy-btn" onclick="copyCode(this)">Copier</button>
+        <pre>budibase = {
+  // Stores
+  component: {},
+  auth: {},        // Utilisateur connecté
+  app: {},         // Info application
+  route: {},
+  screen: {},
+
+  // APIs
+  API: {
+    searchTable: Function,
+    saveRow: Function,
+    fetchRow: Function,
+    deleteRow: Function
+  },
+
+  // Notifications
+  notify: {
+    success: Function,
+    error: Function,
+    warning: Function,
+    info: Function
+  }
+}</pre>
+      </div>
+
+      <h3>Bonnes pratiques</h3>
+      <ul>
+        <li>✅ Toujours utiliser <code>.catch()</code> pour gérer les erreurs</li>
+        <li>✅ Valider les données avant sauvegarde</li>
+        <li>✅ Informer l'utilisateur avec des notifications</li>
+        <li>✅ Utiliser <code>console.log()</code> pour déboguer</li>
+        <li>✅ Tester d'abord avec <code>onClick</code> avant <code>onMount</code></li>
+      </ul>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <p><strong>MEMORA Solutions</strong></p>
+      <p>Développé par Stéphane Lapointe</p>
+      <p>
+        <a href="mailto:stephane@memora.ca">stephane@memora.ca</a> |
+        <a href="https://memora.solutions" target="_blank">memora.solutions</a> |
+        <a href="https://github.com/memora-solutions/budibase-injecteur-code" target="_blank">GitHub</a>
+      </p>
+      <p style="margin-top: 10px; font-size: 12px;">Version 1.0.0 - Licence MIT</p>
+    </div>
+  </div>
+
+  <script>
+    function copyCode(button) {
+      const codeBlock = button.parentElement
+      const code = codeBlock.querySelector('code, pre')
+      const textToCopy = code.textContent
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const originalText = button.textContent
+        button.textContent = '✓ Copié !'
+        button.style.background = '#2196F3'
+
+        setTimeout(() => {
+          button.textContent = originalText
+          button.style.background = '#4CAF50'
+        }, 2000)
+      }).catch(err => {
+        console.error('Erreur de copie:', err)
+        alert('Erreur lors de la copie')
+      })
+    }
+
+    // Animation au chargement
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('📚 Bibliothèque de Snippets Budibase chargée')
+      console.log('👨‍💻 MEMORA Solutions - Stéphane Lapointe')
+      console.log('📧 stephane@memora.ca')
+    })
+  </script>
+</body>
+</html>

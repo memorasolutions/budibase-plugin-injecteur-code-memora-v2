@@ -1,0 +1,220 @@
+{
+  "version": "1.0.0",
+  "description": "Bibliothèque complète de snippets JavaScript pour Budibase",
+  "author": "MEMORA Solutions - Stéphane Lapointe",
+  "categories": [
+    "notifications",
+    "crud-data",
+    "dom-manipulation",
+    "utilities",
+    "complete-examples"
+  ],
+  "snippets": [
+    {
+      "id": "notify-success",
+      "category": "notifications",
+      "label": "Notification Success",
+      "description": "Affiche un message de succès",
+      "code": "budibase.notify.success(\"{{MESSAGE}}\")",
+      "placeholders": ["MESSAGE"],
+      "example": "budibase.notify.success(\"Opération réussie !\")"
+    },
+    {
+      "id": "notify-error",
+      "category": "notifications",
+      "label": "Notification Error",
+      "description": "Affiche un message d'erreur",
+      "code": "budibase.notify.error(\"{{MESSAGE}}\")",
+      "placeholders": ["MESSAGE"],
+      "example": "budibase.notify.error(\"Une erreur est survenue\")"
+    },
+    {
+      "id": "notify-warning",
+      "category": "notifications",
+      "label": "Notification Warning",
+      "description": "Affiche un message d'avertissement",
+      "code": "budibase.notify.warning(\"{{MESSAGE}}\")",
+      "placeholders": ["MESSAGE"],
+      "example": "budibase.notify.warning(\"Attention : action irréversible\")"
+    },
+    {
+      "id": "notify-info",
+      "category": "notifications",
+      "label": "Notification Info",
+      "description": "Affiche un message d'information",
+      "code": "budibase.notify.info(\"{{MESSAGE}}\")",
+      "placeholders": ["MESSAGE"],
+      "example": "budibase.notify.info(\"Chargement en cours...\")"
+    },
+    {
+      "id": "search-table-basic",
+      "category": "crud-data",
+      "label": "Rechercher dans une table",
+      "description": "Recherche des données dans une table avec filtres",
+      "code": "budibase.API.searchTable({\n  tableId: \"{{TABLE_ID}}\",\n  query: {\n    string: {},\n    fuzzy: {},\n    range: {},\n    equal: {\n      {{FIELD_NAME}}: \"{{VALUE}}\"\n    },\n    notEqual: {},\n    empty: {},\n    notEmpty: {}\n  },\n  limit: 50,\n  sort: \"{{SORT_FIELD}}\",\n  sortOrder: \"ascending\"\n}).then(result => {\n  console.log(\"Résultats trouvés:\", result.data)\n  budibase.notify.success(`${result.data.length} résultats trouvés`)\n}).catch(error => {\n  console.error(\"Erreur de recherche:\", error)\n  budibase.notify.error(\"Erreur lors de la recherche\")\n})",
+      "placeholders": ["TABLE_ID", "FIELD_NAME", "VALUE", "SORT_FIELD"],
+      "example": "budibase.API.searchTable({ tableId: \"ta_users\", query: { equal: { status: \"active\" } } })"
+    },
+    {
+      "id": "save-row-basic",
+      "category": "crud-data",
+      "label": "Sauvegarder une ligne",
+      "description": "Crée ou met à jour une ligne dans une table",
+      "code": "budibase.API.saveRow({\n  tableId: \"{{TABLE_ID}}\",\n  {{FIELD_1}}: \"{{VALUE_1}}\",\n  {{FIELD_2}}: \"{{VALUE_2}}\"\n}).then(result => {\n  console.log(\"Ligne sauvegardée:\", result)\n  budibase.notify.success(\"Données enregistrées avec succès\")\n}).catch(error => {\n  console.error(\"Erreur de sauvegarde:\", error)\n  budibase.notify.error(\"Erreur lors de l'enregistrement\")\n})",
+      "placeholders": ["TABLE_ID", "FIELD_1", "VALUE_1", "FIELD_2", "VALUE_2"],
+      "example": "budibase.API.saveRow({ tableId: \"ta_products\", name: \"Produit X\", price: 99.99 })"
+    },
+    {
+      "id": "fetch-row-by-id",
+      "category": "crud-data",
+      "label": "Récupérer une ligne par ID",
+      "description": "Récupère une ligne spécifique par son ID",
+      "code": "budibase.API.fetchRow({\n  tableId: \"{{TABLE_ID}}\",\n  rowId: \"{{ROW_ID}}\"\n}).then(result => {\n  console.log(\"Ligne récupérée:\", result)\n  budibase.notify.success(\"Données chargées\")\n}).catch(error => {\n  console.error(\"Erreur de récupération:\", error)\n  budibase.notify.error(\"Ligne introuvable\")\n})",
+      "placeholders": ["TABLE_ID", "ROW_ID"],
+      "example": "budibase.API.fetchRow({ tableId: \"ta_users\", rowId: \"ro_123abc\" })"
+    },
+    {
+      "id": "delete-row",
+      "category": "crud-data",
+      "label": "Supprimer une ligne",
+      "description": "Supprime une ligne d'une table",
+      "code": "budibase.API.deleteRow({\n  tableId: \"{{TABLE_ID}}\",\n  rowId: \"{{ROW_ID}}\",\n  revId: \"{{REV_ID}}\"\n}).then(result => {\n  console.log(\"Ligne supprimée:\", result)\n  budibase.notify.success(\"Données supprimées avec succès\")\n}).catch(error => {\n  console.error(\"Erreur de suppression:\", error)\n  budibase.notify.error(\"Erreur lors de la suppression\")\n})",
+      "placeholders": ["TABLE_ID", "ROW_ID", "REV_ID"],
+      "example": "budibase.API.deleteRow({ tableId: \"ta_users\", rowId: \"ro_123abc\", revId: \"1-xyz\" })"
+    },
+    {
+      "id": "update-row-partial",
+      "category": "crud-data",
+      "label": "Mettre à jour partiellement",
+      "description": "Met à jour certains champs d'une ligne existante",
+      "code": "budibase.API.fetchRow({\n  tableId: \"{{TABLE_ID}}\",\n  rowId: \"{{ROW_ID}}\"\n}).then(existingRow => {\n  return budibase.API.saveRow({\n    ...existingRow,\n    {{FIELD_TO_UPDATE}}: \"{{NEW_VALUE}}\"\n  })\n}).then(result => {\n  console.log(\"Ligne mise à jour:\", result)\n  budibase.notify.success(\"Mise à jour réussie\")\n}).catch(error => {\n  console.error(\"Erreur de mise à jour:\", error)\n  budibase.notify.error(\"Erreur lors de la mise à jour\")\n})",
+      "placeholders": ["TABLE_ID", "ROW_ID", "FIELD_TO_UPDATE", "NEW_VALUE"],
+      "example": "Récupère puis met à jour un champ spécifique"
+    },
+    {
+      "id": "create-element-dom",
+      "category": "dom-manipulation",
+      "label": "Créer un élément HTML",
+      "description": "Crée dynamiquement un élément HTML et l'insère dans le DOM",
+      "code": "const element = document.createElement('{{ELEMENT_TYPE}}')\nelement.textContent = '{{CONTENT}}'\nelement.className = '{{CLASS_NAME}}'\nelement.id = '{{ELEMENT_ID}}'\n\nconst container = document.querySelector('{{CONTAINER_SELECTOR}}')\nif (container) {\n  container.appendChild(element)\n  budibase.notify.success(\"Élément créé avec succès\")\n} else {\n  budibase.notify.error(\"Conteneur introuvable\")\n}",
+      "placeholders": ["ELEMENT_TYPE", "CONTENT", "CLASS_NAME", "ELEMENT_ID", "CONTAINER_SELECTOR"],
+      "example": "Crée un div avec classe et ID dans un conteneur spécifique"
+    },
+    {
+      "id": "add-click-listener",
+      "category": "dom-manipulation",
+      "label": "Ajouter un écouteur de clic",
+      "description": "Ajoute un gestionnaire d'événement click sur un élément",
+      "code": "const element = document.querySelector('{{SELECTOR}}')\nif (element) {\n  element.addEventListener('click', function(event) {\n    event.preventDefault()\n    console.log('Élément cliqué:', event.target)\n    // Votre code ici\n    {{CUSTOM_CODE}}\n  })\n  budibase.notify.success(\"Écouteur ajouté\")\n} else {\n  budibase.notify.error(\"Élément introuvable\")\n}",
+      "placeholders": ["SELECTOR", "CUSTOM_CODE"],
+      "example": "document.querySelector('.btn').addEventListener('click', ...)"
+    },
+    {
+      "id": "toggle-element-visibility",
+      "category": "dom-manipulation",
+      "label": "Basculer la visibilité",
+      "description": "Affiche ou masque un élément",
+      "code": "const element = document.querySelector('{{SELECTOR}}')\nif (element) {\n  if (element.style.display === 'none') {\n    element.style.display = '{{DISPLAY_TYPE}}'\n    budibase.notify.info(\"Élément affiché\")\n  } else {\n    element.style.display = 'none'\n    budibase.notify.info(\"Élément masqué\")\n  }\n} else {\n  budibase.notify.error(\"Élément introuvable\")\n}",
+      "placeholders": ["SELECTOR", "DISPLAY_TYPE"],
+      "example": "Bascule entre display: none et display: block"
+    },
+    {
+      "id": "modify-element-style",
+      "category": "dom-manipulation",
+      "label": "Modifier le style d'un élément",
+      "description": "Change les propriétés CSS d'un élément",
+      "code": "const element = document.querySelector('{{SELECTOR}}')\nif (element) {\n  element.style.{{CSS_PROPERTY}} = '{{CSS_VALUE}}'\n  budibase.notify.success(\"Style modifié\")\n} else {\n  budibase.notify.error(\"Élément introuvable\")\n}",
+      "placeholders": ["SELECTOR", "CSS_PROPERTY", "CSS_VALUE"],
+      "example": "element.style.backgroundColor = '#4CAF50'"
+    },
+    {
+      "id": "console-log-data",
+      "category": "utilities",
+      "label": "Logger des données",
+      "description": "Affiche des informations dans la console",
+      "code": "console.log('{{LABEL}}:', {{VARIABLE}})\nconsole.table({{VARIABLE}})",
+      "placeholders": ["LABEL", "VARIABLE"],
+      "example": "console.log('User data:', userData)"
+    },
+    {
+      "id": "set-timeout",
+      "category": "utilities",
+      "label": "Exécuter après délai",
+      "description": "Exécute du code après un délai spécifié",
+      "code": "setTimeout(() => {\n  {{CODE_TO_EXECUTE}}\n  budibase.notify.info(\"Exécution différée terminée\")\n}, {{DELAY_MS}})",
+      "placeholders": ["CODE_TO_EXECUTE", "DELAY_MS"],
+      "example": "setTimeout(() => { console.log('Hello') }, 2000)"
+    },
+    {
+      "id": "set-interval",
+      "category": "utilities",
+      "label": "Exécuter périodiquement",
+      "description": "Exécute du code à intervalles réguliers",
+      "code": "const intervalId = setInterval(() => {\n  {{CODE_TO_EXECUTE}}\n}, {{INTERVAL_MS}})\n\n// Pour arrêter l'intervalle plus tard:\n// clearInterval(intervalId)",
+      "placeholders": ["CODE_TO_EXECUTE", "INTERVAL_MS"],
+      "example": "setInterval(() => { fetchData() }, 5000)"
+    },
+    {
+      "id": "conditional-execution",
+      "category": "utilities",
+      "label": "Exécution conditionnelle",
+      "description": "Exécute du code selon une condition",
+      "code": "if ({{CONDITION}}) {\n  {{CODE_IF_TRUE}}\n  budibase.notify.success(\"Condition validée\")\n} else {\n  {{CODE_IF_FALSE}}\n  budibase.notify.warning(\"Condition non validée\")\n}",
+      "placeholders": ["CONDITION", "CODE_IF_TRUE", "CODE_IF_FALSE"],
+      "example": "if (user.role === 'admin') { showAdminPanel() }"
+    },
+    {
+      "id": "get-user-info",
+      "category": "utilities",
+      "label": "Récupérer infos utilisateur",
+      "description": "Obtient les informations de l'utilisateur connecté",
+      "code": "const user = budibase.auth\nconsole.log('Utilisateur connecté:', user)\nconsole.log('Email:', user.email)\nconsole.log('Rôle:', user.roleId)\nbudibase.notify.info(`Connecté en tant que ${user.email}`)",
+      "placeholders": [],
+      "example": "Affiche les informations de l'utilisateur dans la console"
+    },
+    {
+      "id": "example-form-submission",
+      "category": "complete-examples",
+      "label": "Exemple : Soumission de formulaire",
+      "description": "Exemple complet de soumission de formulaire avec validation",
+      "code": "// Récupérer les valeurs du formulaire\nconst formData = {\n  name: document.querySelector('#name').value,\n  email: document.querySelector('#email').value,\n  message: document.querySelector('#message').value\n}\n\n// Validation basique\nif (!formData.name || !formData.email) {\n  budibase.notify.error(\"Veuillez remplir tous les champs obligatoires\")\n  return\n}\n\n// Validation email\nconst emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/\nif (!emailRegex.test(formData.email)) {\n  budibase.notify.error(\"Email invalide\")\n  return\n}\n\n// Sauvegarder dans la base de données\nbudibase.API.saveRow({\n  tableId: \"ta_contacts\",\n  ...formData,\n  submitted_at: new Date().toISOString()\n}).then(result => {\n  console.log(\"Formulaire soumis:\", result)\n  budibase.notify.success(\"Formulaire envoyé avec succès !\")\n  // Réinitialiser le formulaire\n  document.querySelector('form').reset()\n}).catch(error => {\n  console.error(\"Erreur:\", error)\n  budibase.notify.error(\"Erreur lors de l'envoi du formulaire\")\n})",
+      "placeholders": [],
+      "example": "Formulaire complet avec validation et sauvegarde"
+    },
+    {
+      "id": "example-data-table",
+      "category": "complete-examples",
+      "label": "Exemple : Tableau de données dynamique",
+      "description": "Crée un tableau HTML à partir de données Budibase",
+      "code": "// Rechercher les données\nbudibase.API.searchTable({\n  tableId: \"{{TABLE_ID}}\",\n  limit: 100\n}).then(result => {\n  const data = result.data\n  \n  // Créer le tableau HTML\n  let tableHTML = '<table class=\"data-table\"><thead><tr>'\n  \n  // En-têtes (basés sur le premier enregistrement)\n  if (data.length > 0) {\n    Object.keys(data[0]).forEach(key => {\n      if (!key.startsWith('_')) { // Ignorer les champs internes\n        tableHTML += `<th>${key}</th>`\n      }\n    })\n    tableHTML += '</tr></thead><tbody>'\n    \n    // Lignes de données\n    data.forEach(row => {\n      tableHTML += '<tr>'\n      Object.entries(row).forEach(([key, value]) => {\n        if (!key.startsWith('_')) {\n          tableHTML += `<td>${value || '-'}</td>`\n        }\n      })\n      tableHTML += '</tr>'\n    })\n    tableHTML += '</tbody></table>'\n    \n    // Insérer dans le DOM\n    const container = document.querySelector('#table-container')\n    if (container) {\n      container.innerHTML = tableHTML\n      budibase.notify.success(`${data.length} lignes affichées`)\n    }\n  } else {\n    budibase.notify.info(\"Aucune donnée trouvée\")\n  }\n}).catch(error => {\n  console.error(\"Erreur:\", error)\n  budibase.notify.error(\"Erreur lors du chargement des données\")\n})",
+      "placeholders": ["TABLE_ID"],
+      "example": "Génère un tableau HTML à partir d'une table Budibase"
+    },
+    {
+      "id": "example-dashboard-stats",
+      "category": "complete-examples",
+      "label": "Exemple : Statistiques de dashboard",
+      "description": "Calcule et affiche des statistiques à partir de données",
+      "code": "// Récupérer toutes les données\nbudibase.API.searchTable({\n  tableId: \"{{TABLE_ID}}\",\n  limit: 1000\n}).then(result => {\n  const data = result.data\n  \n  // Calculer les statistiques\n  const stats = {\n    total: data.length,\n    active: data.filter(item => item.status === 'active').length,\n    inactive: data.filter(item => item.status === 'inactive').length,\n    pending: data.filter(item => item.status === 'pending').length\n  }\n  \n  // Afficher les statistiques\n  const statsHTML = `\n    <div class=\"stats-container\">\n      <div class=\"stat-card\">\n        <h3>Total</h3>\n        <p class=\"stat-value\">${stats.total}</p>\n      </div>\n      <div class=\"stat-card\">\n        <h3>Actifs</h3>\n        <p class=\"stat-value\">${stats.active}</p>\n      </div>\n      <div class=\"stat-card\">\n        <h3>Inactifs</h3>\n        <p class=\"stat-value\">${stats.inactive}</p>\n      </div>\n      <div class=\"stat-card\">\n        <h3>En attente</h3>\n        <p class=\"stat-value\">${stats.pending}</p>\n      </div>\n    </div>\n  `\n  \n  const container = document.querySelector('#dashboard-stats')\n  if (container) {\n    container.innerHTML = statsHTML\n    budibase.notify.success(\"Statistiques chargées\")\n  }\n  \n  console.log('Statistiques:', stats)\n}).catch(error => {\n  console.error(\"Erreur:\", error)\n  budibase.notify.error(\"Erreur lors du calcul des statistiques\")\n})",
+      "placeholders": ["TABLE_ID"],
+      "example": "Dashboard avec statistiques calculées et affichées"
+    }
+  ],
+  "usage": {
+    "description": "Comment utiliser ces snippets avec le plugin Injecteur de code personnalisé",
+    "steps": [
+      "1. Activez 'Accès au contexte Budibase' dans les propriétés du composant",
+      "2. Copiez le code du snippet désiré",
+      "3. Remplacez les placeholders {{VARIABLE}} par vos valeurs",
+      "4. Collez le code dans le champ 'Code JavaScript'",
+      "5. Choisissez le mode d'exécution approprié (onMount, onClick, onInterval)"
+    ],
+    "tips": [
+      "Utilisez console.log() pour déboguer vos scripts",
+      "Les notifications budibase.notify.* sont visibles par l'utilisateur",
+      "Testez d'abord avec executionMode='onClick' pour contrôler l'exécution",
+      "Les APIs Budibase retournent des Promises, utilisez .then() et .catch()",
+      "Pour les opérations critiques, ajoutez toujours une gestion d'erreur"
+    ]
+  }
+}

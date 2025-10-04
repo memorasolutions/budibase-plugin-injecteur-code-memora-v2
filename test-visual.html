@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Visuel - Plugin Injecteur Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .test-container {
+            border: 2px solid #4CAF50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .test-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #4CAF50;
+        }
+        .output {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 10px;
+            min-height: 50px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status.success { background: #4CAF50; color: white; }
+        .status.error { background: #f44336; color: white; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Tests Visuels - Plugin Injecteur de Code v1.0.3</h1>
+
+    <!-- Test 1: PlaceholderEngine -->
+    <div class="test-container">
+        <div class="test-title">Test 1: PlaceholderEngine <span id="test1-status" class="status"></span></div>
+        <button onclick="runTest1()">Lancer Test PlaceholderEngine</button>
+        <div class="output" id="test1-output"></div>
+    </div>
+
+    <!-- Test 2: SnippetLibrary -->
+    <div class="test-container">
+        <div class="test-title">Test 2: SnippetLibrary <span id="test2-status" class="status"></span></div>
+        <button onclick="runTest2()">Lancer Test SnippetLibrary</button>
+        <div class="output" id="test2-output"></div>
+    </div>
+
+    <!-- Test 3: CodeExecutor -->
+    <div class="test-container">
+        <div class="test-title">Test 3: CodeExecutor <span id="test3-status" class="status"></span></div>
+        <button onclick="runTest3()">Lancer Test CodeExecutor</button>
+        <div class="output" id="test3-output"></div>
+    </div>
+
+    <!-- Test 4: CSSInjector -->
+    <div class="test-container">
+        <div class="test-title">Test 4: CSSInjector <span id="test4-status" class="status"></span></div>
+        <button onclick="runTest4()">Lancer Test CSSInjector</button>
+        <div class="output" id="test4-output">
+            <div data-injector-id="test-scope">Ce texte doit devenir ROUGE</div>
+        </div>
+    </div>
+
+    <!-- Test 5: Hello World Template -->
+    <div class="test-container">
+        <div class="test-title">Test 5: Template Hello World <span id="test5-status" class="status"></span></div>
+        <button onclick="runTest5()">Lancer Template Hello World</button>
+        <div class="output" id="test5-output"></div>
+    </div>
+
+    <!-- Charger les modules -->
+    <script type="module">
+        import { PlaceholderEngine } from './src/modules/placeholders/PlaceholderEngine.js';
+        import { SnippetLibrary } from './src/modules/snippets/SnippetLibrary.js';
+        import { CodeExecutor } from './src/modules/code-execution/CodeExecutor.js';
+        import { CSSInjector } from './src/modules/css-injection/CSSInjector.js';
+
+        // Exposer globalement pour les tests
+        window.PlaceholderEngine = PlaceholderEngine;
+        window.SnippetLibrary = SnippetLibrary;
+        window.CodeExecutor = CodeExecutor;
+        window.CSSInjector = CSSInjector;
+
+        console.log('✓ Modules chargés avec succès');
+    </script>
+
+    <script>
+        function setStatus(testId, success, message = '') {
+            const statusEl = document.getElementById(`test${testId}-status`);
+            statusEl.className = 'status ' + (success ? 'success' : 'error');
+            statusEl.textContent = success ? '✓ PASS' : '✗ FAIL';
+            if (message) {
+                statusEl.textContent += ' - ' + message;
+            }
+        }
+
+        function runTest1() {
+            const output = document.getElementById('test1-output');
+            try {
+                const code = '{{NAME}} est {{AGE}} ans';
+                const values = { NAME: 'Claude', AGE: '2' };
+                const result = window.PlaceholderEngine.replace(code, values);
+
+                output.innerHTML = `
+                    <strong>Input:</strong> ${code}<br>
+                    <strong>Values:</strong> ${JSON.stringify(values)}<br>
+                    <strong>Output:</strong> ${result}<br>
+                    <strong>Expected:</strong> Claude est 2 ans
+                `;
+
+                const pass = result === 'Claude est 2 ans';
+                setStatus(1, pass);
+            } catch (error) {
+                output.innerHTML = `<span style="color: red;">Erreur: ${error.message}</span>`;
+                setStatus(1, false, error.message);
+            }
+        }
+
+        function runTest2() {
+            const output = document.getElementById('test2-output');
+            try {
+                const snippets = window.SnippetLibrary.getAll();
+                const helloWorld = window.SnippetLibrary.getById('hello-world');
+
+                output.innerHTML = `
+                    <strong>Total snippets:</strong> ${snippets.length}<br>
+                    <strong>Hello World snippet:</strong><br>
+                    <pre>${JSON.stringify(helloWorld, null, 2)}</pre>
+                `;
+
+                const pass = snippets.length > 0 && helloWorld !== null;
+                setStatus(2, pass);
+            } catch (error) {
+                output.innerHTML = `<span style="color: red;">Erreur: ${error.message}</span>`;
+                setStatus(2, false, error.message);
+            }
+        }
+
+        function runTest3() {
+            const output = document.getElementById('test3-output');
+            try {
+                const code = 'return 2 + 2';
+                const result = window.CodeExecutor.execute(code, { sandboxMode: true });
+
+                output.innerHTML = `
+                    <strong>Code:</strong> ${code}<br>
+                    <strong>Result:</strong> ${JSON.stringify(result)}<br>
+                    <strong>Value:</strong> ${result.result}
+                `;
+
+                const pass = result.success === true && result.result === 4;
+                setStatus(3, pass);
+            } catch (error) {
+                output.innerHTML = `<span style="color: red;">Erreur: ${error.message}</span>`;
+                setStatus(3, false, error.message);
+            }
+        }
+
+        function runTest4() {
+            const output = document.getElementById('test4-output');
+            try {
+                const css = 'div { color: red; font-weight: bold; }';
+                const scopeId = 'test-scope';
+                const container = output.querySelector('[data-injector-id]');
+
+                const styleEl = window.CSSInjector.inject(css, scopeId, container);
+
+                const pass = styleEl !== null && container.style.color !== 'red';
+                setStatus(4, pass);
+
+                setTimeout(() => {
+                    const computedColor = window.getComputedStyle(container).color;
+                    output.innerHTML += `<br><strong>Couleur appliquée:</strong> ${computedColor}`;
+                }, 100);
+            } catch (error) {
+                output.innerHTML += `<br><span style="color: red;">Erreur: ${error.message}</span>`;
+                setStatus(4, false, error.message);
+            }
+        }
+
+        function runTest5() {
+            const output = document.getElementById('test5-output');
+            try {
+                const helloWorld = window.SnippetLibrary.getById('hello-world');
+
+                output.innerHTML = `
+                    <strong>Code du template:</strong><br>
+                    <pre>${helloWorld.code}</pre>
+                    <strong>Placeholders:</strong> ${helloWorld.placeholders.length}<br>
+                    <button onclick="executeHelloWorld()">▶ Exécuter</button>
+                    <div id="hello-result"></div>
+                `;
+
+                setStatus(5, true);
+            } catch (error) {
+                output.innerHTML = `<span style="color: red;">Erreur: ${error.message}</span>`;
+                setStatus(5, false, error.message);
+            }
+        }
+
+        function executeHelloWorld() {
+            const resultDiv = document.getElementById('hello-result');
+            const helloWorld = window.SnippetLibrary.getById('hello-world');
+
+            const result = window.CodeExecutor.execute(helloWorld.code, {
+                sandboxMode: true,
+                onSuccess: () => {
+                    resultDiv.innerHTML = '<br><strong style="color: green;">✓ Exécuté avec succès!</strong><br>Vérifier la console pour les logs.';
+                },
+                onError: (error) => {
+                    resultDiv.innerHTML = `<br><strong style="color: red;">✗ Erreur: ${error.message}</strong>`;
+                }
+            });
+        }
+
+        // Auto-run tous les tests au chargement
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                console.log('🚀 Lancement automatique des tests...');
+                runTest1();
+                setTimeout(() => runTest2(), 200);
+                setTimeout(() => runTest3(), 400);
+                setTimeout(() => runTest4(), 600);
+                setTimeout(() => runTest5(), 800);
+            }, 500);
+        });
+    </script>

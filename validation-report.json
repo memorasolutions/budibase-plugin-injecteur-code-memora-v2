@@ -1,0 +1,133 @@
+{
+  "timestamp": "2025-10-04T16:36:11.706Z",
+  "library_version": "1.0.0",
+  "validation": {
+    "totalSnippets": 21,
+    "validSnippets": 21,
+    "snippetsWithErrors": 0,
+    "snippetsWithWarnings": 0,
+    "totalErrors": 0,
+    "totalWarnings": 0,
+    "details": [
+      {
+        "id": "notify-success",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "notify-error",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "notify-warning",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "notify-info",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "search-table-basic",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "save-row-basic",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "fetch-row-by-id",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "delete-row",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "update-row-partial",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "create-element-dom",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "add-click-listener",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "toggle-element-visibility",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "modify-element-style",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "console-log-data",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "set-timeout",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "set-interval",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "conditional-execution",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "get-user-info",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "example-form-submission",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "example-data-table",
+        "errors": [],
+        "warnings": []
+      },
+      {
+        "id": "example-dashboard-stats",
+        "errors": [],
+        "warnings": []
+      }
+    ]
+  },
+  "statistics": {
+    "byCategory": {
+      "notifications": 4,
+      "crud-data": 5,
+      "dom-manipulation": 4,
+      "utilities": 5,
+      "complete-examples": 3
+    },
+    "withPlaceholders": 19,
+    "withoutPlaceholders": 2,
+    "avgCodeLength": 367,
+    "avgDescriptionLength": 0,
+    "totalCodeLength": 7713
+  }
+}

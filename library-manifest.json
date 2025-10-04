@@ -1,0 +1,284 @@
+{
+  "name": "Budibase Snippets Library",
+  "version": "1.0.0",
+  "description": "Bibliothèque complète de snippets JavaScript pour Budibase - 21 snippets couvrant tous les cas d'usage courants",
+  "author": {
+    "name": "Stéphane Lapointe",
+    "email": "stephane@memora.ca",
+    "organization": "MEMORA Solutions",
+    "website": "https://memora.solutions"
+  },
+  "license": "MIT",
+  "created": "2025-10-04",
+  "updated": "2025-10-04",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/memora-solutions/budibase-injecteur-code"
+  },
+  "keywords": [
+    "budibase",
+    "snippets",
+    "javascript",
+    "code-library",
+    "api",
+    "crud",
+    "notifications",
+    "dom-manipulation",
+    "utilities",
+    "examples"
+  ],
+  "statistics": {
+    "total_snippets": 21,
+    "total_categories": 5,
+    "with_placeholders": 19,
+    "without_placeholders": 2,
+    "complete_examples": 3
+  },
+  "categories": [
+    {
+      "id": "notifications",
+      "name": "Notifications",
+      "description": "Snippets pour afficher des notifications utilisateur",
+      "count": 4,
+      "snippets": [
+        "notify-success",
+        "notify-error",
+        "notify-warning",
+        "notify-info"
+      ]
+    },
+    {
+      "id": "crud-data",
+      "name": "CRUD Données",
+      "description": "Snippets pour les opérations CRUD sur les données Budibase",
+      "count": 5,
+      "snippets": [
+        "search-table-basic",
+        "save-row-basic",
+        "fetch-row-by-id",
+        "delete-row",
+        "update-row-partial"
+      ]
+    },
+    {
+      "id": "dom-manipulation",
+      "name": "Manipulation DOM",
+      "description": "Snippets pour manipuler le DOM et gérer les événements",
+      "count": 4,
+      "snippets": [
+        "create-element-dom",
+        "add-click-listener",
+        "toggle-element-visibility",
+        "modify-element-style"
+      ]
+    },
+    {
+      "id": "utilities",
+      "name": "Utilitaires",
+      "description": "Snippets utilitaires pour le debug, timers et conditions",
+      "count": 5,
+      "snippets": [
+        "console-log-data",
+        "set-timeout",
+        "set-interval",
+        "conditional-execution",
+        "get-user-info"
+      ]
+    },
+    {
+      "id": "complete-examples",
+      "name": "Exemples Complets",
+      "description": "Exemples complets combinant plusieurs APIs",
+      "count": 3,
+      "snippets": [
+        "example-form-submission",
+        "example-data-table",
+        "example-dashboard-stats"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "name": "budibase-snippets-library.json",
+      "size": "16 KB",
+      "description": "Bibliothèque JSON complète avec tous les snippets",
+      "format": "JSON",
+      "audience": "Tous"
+    },
+    {
+      "name": "SNIPPETS-GUIDE.md",
+      "size": "13 KB",
+      "description": "Guide détaillé avec exemples et documentation complète",
+      "format": "Markdown",
+      "audience": "Utilisateurs"
+    },
+    {
+      "name": "QUICK-REFERENCE.md",
+      "size": "2.5 KB",
+      "description": "Référence rapide one-page (cheat sheet)",
+      "format": "Markdown",
+      "audience": "Utilisateurs"
+    },
+    {
+      "name": "snippets-demo.html",
+      "size": "23 KB",
+      "description": "Démo visuelle interactive dans le navigateur",
+      "format": "HTML/CSS/JS",
+      "audience": "Tous"
+    },
+    {
+      "name": "budibase-api.d.ts",
+      "size": "8.1 KB",
+      "description": "Définitions TypeScript pour l'autocomplétion",
+      "format": "TypeScript",
+      "audience": "Développeurs"
+    },
+    {
+      "name": "snippets-index.csv",
+      "size": "2.5 KB",
+      "description": "Index CSV pour import dans tableurs/DB",
+      "format": "CSV",
+      "audience": "Développeurs"
+    },
+    {
+      "name": "INTEGRATION-GUIDE.md",
+      "size": "13 KB",
+      "description": "Guide d'intégration pour développeurs",
+      "format": "Markdown",
+      "audience": "Développeurs"
+    },
+    {
+      "name": "LIBRARY-README.md",
+      "size": "9.5 KB",
+      "description": "Vue d'ensemble complète de la bibliothèque",
+      "format": "Markdown",
+      "audience": "Tous"
+    },
+    {
+      "name": "library-manifest.json",
+      "size": "~5 KB",
+      "description": "Manifeste et métadonnées de la bibliothèque",
+      "format": "JSON",
+      "audience": "Développeurs"
+    }
+  ],
+  "requirements": {
+    "budibase_version": "2.x+",
+    "plugin_required": "injecteur-code-personnalise",
+    "plugin_version": "1.0.2+",
+    "context_access": true,
+    "description": "Nécessite l'activation de 'Accès au contexte Budibase' dans les propriétés du plugin"
+  },
+  "apis_used": [
+    "budibase.API.searchTable",
+    "budibase.API.saveRow",
+    "budibase.API.fetchRow",
+    "budibase.API.deleteRow",
+    "budibase.notify.success",
+    "budibase.notify.error",
+    "budibase.notify.warning",
+    "budibase.notify.info",
+    "budibase.auth",
+    "budibase.component",
+    "budibase.app",
+    "budibase.route",
+    "budibase.screen"
+  ],
+  "complexity_levels": {
+    "beginner": {
+      "count": 10,
+      "description": "Snippets simples pour débutants",
+      "examples": ["notify-success", "toggle-element-visibility", "console-log-data"]
+    },
+    "intermediate": {
+      "count": 8,
+      "description": "Snippets de niveau intermédiaire",
+      "examples": ["search-table-basic", "save-row-basic", "create-element-dom"]
+    },
+    "advanced": {
+      "count": 3,
+      "description": "Exemples complets et avancés",
+      "examples": ["example-form-submission", "example-data-table", "example-dashboard-stats"]
+    }
+  },
+  "usage": {
+    "quick_start": [
+      "1. Installer le plugin 'Injecteur de code personnalisé'",
+      "2. Activer 'Accès au contexte Budibase' dans les propriétés",
+      "3. Consulter QUICK-REFERENCE.md ou ouvrir snippets-demo.html",
+      "4. Copier le snippet désiré",
+      "5. Remplacer les placeholders {{VARIABLE}}",
+      "6. Tester avec mode 'onClick' puis passer à 'onMount'"
+    ],
+    "documentation_order": [
+      "LIBRARY-README.md - Vue d'ensemble",
+      "QUICK-REFERENCE.md - Référence rapide",
+      "snippets-demo.html - Démo visuelle",
+      "SNIPPETS-GUIDE.md - Guide détaillé",
+      "INTEGRATION-GUIDE.md - Pour développeurs"
+    ]
+  },
+  "support": {
+    "email": "stephane@memora.ca",
+    "website": "https://memora.solutions",
+    "documentation": "Voir fichiers LIBRARY-README.md et SNIPPETS-GUIDE.md",
+    "issues": "Contacter directement par email"
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2025-10-04",
+      "changes": [
+        "Release initiale",
+        "21 snippets couvrant 5 catégories",
+        "8 fichiers de documentation",
+        "Démo HTML interactive",
+        "Définitions TypeScript",
+        "Guide d'intégration développeurs"
+      ]
+    }
+  ],
+  "roadmap": [
+    {
+      "version": "1.1.0",
+      "status": "planned",
+      "features": [
+        "Snippets additionnels pour gestion de fichiers",
+        "Snippets pour relations entre tables",
+        "Snippets pour permissions et rôles",
+        "Snippets pour workflows"
+      ]
+    },
+    {
+      "version": "2.0.0",
+      "status": "planned",
+      "features": [
+        "Interface web interactive pour générer snippets",
+        "Extension VS Code",
+        "CLI pour générer snippets personnalisés",
+        "Import/Export de collections personnalisées"
+      ]
+    }
+  ],
+  "contributing": {
+    "guidelines": "Voir INTEGRATION-GUIDE.md section Contribution",
+    "format": {
+      "required_fields": ["id", "category", "label", "description", "code", "placeholders", "example"],
+      "id_format": "kebab-case (a-z, 0-9, -)",
+      "code_format": "JavaScript valide avec placeholders {{VARIABLE}}"
+    }
+  },
+  "meta": {
+    "total_size": "~90 KB",
+    "total_files": 9,
+    "languages": ["JavaScript", "TypeScript", "JSON", "HTML", "CSS", "Markdown", "CSV"],
+    "target_audience": ["Développeurs Budibase", "No-code builders", "Intégrateurs"],
+    "use_cases": [
+      "Prototypage rapide",
+      "Apprentissage API Budibase",
+      "Templates de code",
+      "Référence rapide",
+      "Intégration IDE"
+    ]
+  }
+}

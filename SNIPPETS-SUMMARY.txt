@@ -1,0 +1,185 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                                                              ║
+║       BIBLIOTHÈQUE DE SNIPPETS JAVASCRIPT POUR BUDIBASE                      ║
+║                                                                              ║
+║       Version 1.0.0                                                          ║
+║       MEMORA Solutions - Stéphane Lapointe                                   ║
+║       stephane@memora.ca                                                     ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📊 STATISTIQUES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Total snippets:                21
+Total catégories:              5
+Snippets avec placeholders:    19
+Snippets sans placeholders:    2
+Exemples complets:             3
+
+Longueur moyenne du code:      367 caractères
+Taille totale bibliothèque:    ~90 KB
+
+✅ Validation:                 100% réussie (21/21)
+
+
+📁 FICHIERS DISPONIBLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. budibase-snippets-library.json    (16 KB)  - Bibliothèque JSON complète
+2. SNIPPETS-GUIDE.md                 (13 KB)  - Guide détaillé avec exemples
+3. QUICK-REFERENCE.md                (2.5 KB) - Référence rapide (cheat sheet)
+4. snippets-demo.html                (23 KB)  - Démo visuelle interactive
+5. budibase-api.d.ts                 (8.1 KB) - Définitions TypeScript
+6. snippets-index.csv                (2.5 KB) - Index CSV pour import
+7. INTEGRATION-GUIDE.md              (13 KB)  - Guide d'intégration dev
+8. LIBRARY-README.md                 (9.5 KB) - Vue d'ensemble complète
+9. library-manifest.json             (5 KB)   - Manifeste et métadonnées
+10. validate-library.js              (10 KB)  - Script de validation
+
+
+📚 CATÉGORIES DE SNIPPETS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔔 NOTIFICATIONS (4 snippets)
+   - notify-success          : Notification Success
+   - notify-error            : Notification Error
+   - notify-warning          : Notification Warning
+   - notify-info             : Notification Info
+
+💾 CRUD DONNÉES (5 snippets)
+   - search-table-basic      : Rechercher dans une table
+   - save-row-basic          : Sauvegarder une ligne
+   - fetch-row-by-id         : Récupérer une ligne par ID
+   - delete-row              : Supprimer une ligne
+   - update-row-partial      : Mettre à jour partiellement
+
+🎨 MANIPULATION DOM (4 snippets)
+   - create-element-dom      : Créer un élément HTML
+   - add-click-listener      : Ajouter un écouteur de clic
+   - toggle-element-visibility : Basculer la visibilité
+   - modify-element-style    : Modifier le style d'un élément
+
+🔧 UTILITAIRES (5 snippets)
+   - console-log-data        : Logger des données
+   - set-timeout             : Exécuter après délai
+   - set-interval            : Exécuter périodiquement
+   - conditional-execution   : Exécution conditionnelle
+   - get-user-info           : Récupérer infos utilisateur
+
+⭐ EXEMPLES COMPLETS (3 snippets)
+   - example-form-submission : Formulaire avec validation
+   - example-data-table      : Tableau de données dynamique
+   - example-dashboard-stats : Dashboard avec statistiques
+
+
+🚀 DÉMARRAGE RAPIDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Pour les utilisateurs Budibase:
+1. Consultez QUICK-REFERENCE.md pour une vue d'ensemble rapide
+2. Ouvrez snippets-demo.html dans votre navigateur
+3. Cherchez le snippet dont vous avez besoin
+4. Cliquez "Copier" et collez dans le plugin
+
+Pour les développeurs:
+1. Consultez INTEGRATION-GUIDE.md pour l'intégration
+2. Chargez budibase-snippets-library.json dans votre app
+3. Utilisez budibase-api.d.ts pour l'autocomplétion IDE
+
+
+💡 EXEMPLE D'UTILISATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+// 1. Activer "Accès au contexte Budibase" dans les propriétés du plugin
+// 2. Utiliser les APIs Budibase directement:
+
+// Rechercher des utilisateurs actifs
+budibase.API.searchTable({
+  tableId: "ta_users",
+  query: {
+    equal: { status: "active" }
+  },
+  limit: 50
+}).then(result => {
+  budibase.notify.success(`${result.data.length} utilisateurs trouvés`)
+  console.log("Résultats:", result.data)
+})
+
+// Créer un nouveau produit
+budibase.API.saveRow({
+  tableId: "ta_products",
+  name: "Nouveau produit",
+  price: 99.99,
+  status: "active"
+}).then(result => {
+  budibase.notify.success("Produit créé avec succès!")
+})
+
+
+🔧 APIS BUDIBASE DISPONIBLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Objet global budibase:
+  - component    : Informations du composant
+  - auth         : Utilisateur connecté
+  - app          : Informations de l'application
+  - route        : Informations de routing
+  - screen       : Informations de l'écran
+  - API          : APIs CRUD (searchTable, saveRow, fetchRow, deleteRow)
+  - notify       : Notifications (success, error, warning, info)
+
+
+📖 DOCUMENTATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Ordre de lecture recommandé:
+1. LIBRARY-README.md        - Vue d'ensemble générale
+2. QUICK-REFERENCE.md       - Référence rapide
+3. snippets-demo.html       - Démo visuelle interactive
+4. SNIPPETS-GUIDE.md        - Documentation complète
+5. INTEGRATION-GUIDE.md     - Pour intégration avancée
+
+
+⚙️ PRÉREQUIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Plugin "Injecteur de code personnalisé" v1.0.2+
+- Budibase 2.x ou supérieur
+- Option "Accès au contexte Budibase" activée
+
+
+✅ VALIDATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+La bibliothèque a été validée avec succès:
+- Structure JSON: ✅ Valide
+- Champs requis: ✅ Tous présents
+- IDs uniques: ✅ Aucun doublon
+- Placeholders: ✅ Tous dans le code
+- Catégories: ✅ Toutes valides
+
+Lancez le script de validation:
+  node validate-library.js
+
+
+📞 SUPPORT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Email:    stephane@memora.ca
+Web:      https://memora.solutions
+GitHub:   https://github.com/memora-solutions/budibase-injecteur-code
+
+
+📜 LICENCE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MIT License
+Copyright (c) 2025 MEMORA Solutions - Stéphane Lapointe
+
+Utilisation libre pour vos projets personnels et commerciaux.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+© 2025 MEMORA Solutions - Tous droits réservés
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

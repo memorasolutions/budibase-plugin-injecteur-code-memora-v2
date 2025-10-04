@@ -1,0 +1,70 @@
+{
+  "type": "component",
+  "metadata": {},
+  "schema": {
+    "name": "injecteur-code-personnalise",
+    "friendlyName": "Injecteur de code personnalisé",
+    "description": "Permet d'injecter du code HTML, CSS et JavaScript personnalisé dans votre application.\n\nCréé par MEMORA Solutions - Stéphane Lapointe (stephane@memora.ca)\nhttps://memora.solutions\nVersion 1.0.1",
+    "icon": "Code",
+    "settings": [
+      {
+        "type": "text",
+        "label": "Code HTML",
+        "key": "htmlCode",
+        "defaultValue": ""
+      },
+      {
+        "type": "text",
+        "label": "Code CSS",
+        "key": "cssCode",
+        "defaultValue": ""
+      },
+      {
+        "type": "text",
+        "label": "Code JavaScript",
+        "key": "jsCode",
+        "defaultValue": ""
+      },
+      {
+        "type": "select",
+        "label": "Mode d'exécution",
+        "key": "executionMode",
+        "defaultValue": "onMount",
+        "options": [
+          {
+            "label": "Au chargement (onMount)",
+            "value": "onMount"
+          },
+          {
+            "label": "Au clic (onClick)",
+            "value": "onClick"
+          },
+          {
+            "label": "En intervalle (onInterval)",
+            "value": "onInterval"
+          }
+        ]
+      },
+      {
+        "type": "number",
+        "label": "Intervalle (ms)",
+        "key": "intervalTime",
+        "defaultValue": 1000,
+        "min": 100,
+        "max": 60000,
+        "showIf": {
+          "executionMode": "onInterval"
+        }
+      },
+      {
+        "type": "boolean",
+        "label": "Mode sandbox (sécurisé)",
+        "key": "sandboxMode",
+        "defaultValue": false
+      }
+    ],
+    "info": "Créé par MEMORA Solutions | Stéphane Lapointe | stephane@memora.ca | https://memora.solutions",
+    "requiredAncestors": [],
+    "legalDirections": ["row", "column"]
+  }
+}
