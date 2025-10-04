@@ -3,7 +3,7 @@
 **Auteur:** MEMORA Solutions - Stéphane Lapointe
 **Contact:** stephane@memora.ca
 **Website:** https://memora.solutions
-**Version:** 1.0.0
+**Version:** 2.2.0
 **Licence:** MIT
 
 ---
