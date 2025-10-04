@@ -1,0 +1,39 @@
+# Dossiers de build
+_builds/
+dist/
+node_modules/
+
+# Fichiers de build
+*.tar.gz
+*.tgz
+plugin.min.js
+
+# Fichiers de backup
+*-backup.json
+src-v1.0.1-backup/
+
+# Fichiers de test
+test.html
+test-visual.html
+playwright-test.js
+screenshot-*.png
+
+# Fichiers de validation
+validation-report.json
+
+# Fichiers temporaires
+.DS_Store
+*.log
+*.swp
+*.swo
+*~
+
+# IDE
+.vscode/
+.idea/
+*.sublime-*
+
+# Package manager
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
