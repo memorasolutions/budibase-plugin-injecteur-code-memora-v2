@@ -1,3 +1,13 @@
+/**
+ * Configuration Rollup - Injecteur de code personnalisé pour Budibase
+ *
+ * Auteur: MEMORA Solutions
+ * Contact: Stéphane Lapointe <stephane@memora.ca>
+ * Website: https://memora.solutions
+ * Version: 2.2.0
+ * Licence: MIT
+ */
+
 import commonjs from "@rollup/plugin-commonjs"
 import resolve from "@rollup/plugin-node-resolve"
 import svelte from "rollup-plugin-svelte"

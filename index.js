@@ -1,3 +1,13 @@
+/**
+ * Injecteur de code personnalisé pour Budibase
+ *
+ * Auteur: MEMORA Solutions
+ * Contact: Stéphane Lapointe <stephane@memora.ca>
+ * Website: https://memora.solutions
+ * Version: 2.2.0
+ * Licence: MIT
+ */
+
 import Wrapper from "./lib/Wrapper.svelte"
 import schema from "./schema.json"
 import pkg from "./package.json"
