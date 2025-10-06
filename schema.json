@@ -51,7 +51,11 @@
         "key": "intervalTime",
         "defaultValue": 1000,
         "min": 100,
-        "max": 60000
+        "max": 60000,
+        "dependsOn": {
+          "setting": "executionMode",
+          "value": "onInterval"
+        }
       },
       {
         "type": "boolean",
