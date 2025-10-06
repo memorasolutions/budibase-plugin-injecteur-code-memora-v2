@@ -8,19 +8,19 @@
     "icon": "Code",
     "settings": [
       {
-        "type": "text",
+        "type": "text/multiline",
         "label": "Code HTML",
         "key": "htmlCode",
         "defaultValue": ""
       },
       {
-        "type": "text",
+        "type": "text/multiline",
         "label": "Code CSS",
         "key": "cssCode",
         "defaultValue": ""
       },
       {
-        "type": "text",
+        "type": "text/multiline",
         "label": "Code JavaScript",
         "key": "jsCode",
         "defaultValue": ""
@@ -52,8 +52,9 @@
         "defaultValue": 1000,
         "min": 100,
         "max": 60000,
-        "showIf": {
-          "executionMode": "onInterval"
+        "dependsOn": {
+          "setting": "executionMode",
+          "value": "onInterval"
         }
       },
       {

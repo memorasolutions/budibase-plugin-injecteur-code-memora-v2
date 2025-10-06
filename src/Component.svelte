@@ -39,7 +39,7 @@
       } else {
         eval(jsCode)
       }
-      notificationStore?.actions?.success("Code JavaScript exécuté avec succès")
+      //notificationStore?.actions?.success("Code JavaScript exécuté avec succès")
     } catch (error) {
       console.error("Erreur d'exécution JavaScript:", error)
       notificationStore?.actions?.error(`Erreur JavaScript: ${error.message}`)

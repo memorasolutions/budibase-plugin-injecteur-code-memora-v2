@@ -1,6 +1,6 @@
 {
   "name": "injecteur-code-personnalise",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Injecteur de code personnalisé (HTML, CSS, JavaScript) pour Budibase - Affichage texte corrigé",
   "author": "MEMORA Solutions - Stéphane Lapointe <stephane@memora.ca> (https://memora.solutions)",
   "contributors": [
